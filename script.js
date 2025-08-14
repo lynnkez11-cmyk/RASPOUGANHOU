@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function resizeCanvas() {
-    const availableHeight = window.innerHeight * 0.3; // 30% da tela
+    const availableHeight = Math.min(window.innerHeight * 0.35, 180); 
     canvas.width = canvas.parentElement.clientWidth;
     canvas.height = availableHeight;
     canvas.style.width = '100%';

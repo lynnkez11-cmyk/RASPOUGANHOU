@@ -499,3 +499,53 @@ html, body {
     box-shadow: 0 0 18px rgba(255, 215, 0, .55), inset 0 0 0 2px rgba(255, 215, 0, .9);
     border-radius: 10px;
 }
+
+@media (max-width: 480px) {
+    .header {
+        padding: 8px 10px;
+    }
+
+    .logo img {
+        height: 30px;
+    }
+
+    .game-title {
+        margin-bottom: 15px;
+    }
+
+    .game-title h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .game-description {
+        font-size: 12px;
+    }
+
+    .scratch-card {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    #scratchCanvas {
+        height: 150px; /* menor para caber na tela */
+    }
+
+    .buy-button {
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .balance-section {
+        padding: 10px;
+    }
+
+    .balance-amount {
+        font-size: 18px;
+    }
+
+    .popup {
+        padding: 20px;
+    }
+}
