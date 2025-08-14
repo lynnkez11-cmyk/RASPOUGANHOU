@@ -4,22 +4,26 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     color: white;
     height: 100vh;
-    overflow: hidden; /* impede scroll */
+    overflow: hidden;
+    /* impede scroll */
 }
 
 
 .container {
     max-width: 400px;
     margin: 0 auto;
-    height: 100vh; /* sempre ocupar a tela */
+    height: 100vh;
+    /* sempre ocupar a tela */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* distribui elementos */
+    justify-content: space-between;
+    /* distribui elementos */
 }
 
 /* Header */
@@ -272,6 +276,20 @@ html, body {
     transition: all 0.3s ease;
 }
 
+.redeem-button {
+    width: 100%;
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
 .buy-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
@@ -503,7 +521,8 @@ html, body {
 @media (max-width: 480px) {
     .main-content {
         padding: 10px;
-        flex: 1; /* ocupa espaço restante */
+        flex: 1;
+        /* ocupa espaço restante */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -514,7 +533,8 @@ html, body {
     }
 
     #scratchCanvas {
-        height: 140px; /* menor que antes */
+        height: 140px;
+        /* menor que antes */
     }
 
     .buy-button {

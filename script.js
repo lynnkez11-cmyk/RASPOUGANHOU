@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function resizeCanvas() {
-    const availableHeight = Math.min(window.innerHeight * 0.28, 150); 
+    const availableHeight = Math.min(window.innerHeight * 0.28, 150);
     canvas.width = canvas.parentElement.clientWidth;
     canvas.height = availableHeight;
     canvas.style.width = '100%';
@@ -301,7 +301,7 @@ function checkWinCondition() {
             // Espera para o jogador ver a vitória
             setTimeout(() => {
                 document.getElementById('prizeWon').textContent = formatCurrency(gameState.prizeAmount);
-                
+
                 // Troca o emoji pela imagem real do prêmio
                 const moneyIcon = document.querySelector('.money-icon');
                 moneyIcon.innerHTML = `<img src="${prizeImageSrc}" alt="Prêmio" style="width:60px;height:auto;">`;
@@ -392,9 +392,18 @@ function resetScratchCard() {
 }
 
 function endGame() {
-    const buyButton = document.getElementById('buyButton');
-    buyButton.textContent = 'Jogo Finalizado';
-    buyButton.disabled = true;
+    // Esconde botão de Raspar
+    document.getElementById('buyButton').style.display = 'none';
+
+    // Mostra botão de Resgatar
+    const redeemButton = document.getElementById('redeemButton');
+    redeemButton.style.display = 'inline-block';
+
+    // Define o clique para ir à página de resgate
+    redeemButton.onclick = function () {
+        const premio = encodeURIComponent(gameState.totalEarned);
+        window.location.href = `saque.html?valor=${premio}`;
+    };
 }
 
 function updateUI() {

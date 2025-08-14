@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saque - Raspou Ganhou</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .saldo-label {
+            font-size: 14px;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .saldo-valor {
+            font-size: 36px;
+            font-weight: bold;
+            color: #00ff95;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .pix-options {
+            display: grid;
+            grid-template-columns: repeat(2, 120px);
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .pix-option {
+            background: #2a2a2a;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .pix-option:hover {
+            background: #333;
+        }
+
+        .pix-option.selected {
+            border-color: #00ff95;
+            background: #333;
+            box-shadow: 0 0 8px rgba(0, 255, 149, 0.4);
+        }
+
+        .pix-input {
+            display: block;
+            width: 90%;
+            max-width: 300px;
+            margin: 0 auto 12px;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background: #333;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .btn-saque {
+            display: block;
+            width: 90%;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ff95, #00cc78);
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 12px rgba(0, 255, 149, 0.4);
+        }
+
+        .btn-saque:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 255, 149, 0.7);
+        }
+
+        .conf {
+            font-size: 11px;
+            color: #888;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal {
+            background: #1a1a1a;
+            color: black;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 350px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .modal p {
+            font-size: 20px;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .modal button {
+            background: linear-gradient(135deg, #00ff95, #00cc78);
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="images/logo_rs.webp" alt="Raspou Ganhou">
+            </div>
+            <div class="balance-earned">
+                <span class="balance-label">Ganhos:</span>
+                <span class="balance-value" id="totalEarned">R$ 0,00</span>
+            </div>
+        </header>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <h1>💸 Solicitar Saque</h1>
+            <div class="saldo-label">Saldo disponível para saque:</div>
+            <div class="saldo-valor" id="valor">R$ 0,00</div>
+
+            <div class="pix-options">
+                <div class="pix-option" data-type="CPF">CPF</div>
+                <div class="pix-option" data-type="CNPJ">CNPJ</div>
+                <div class="pix-option" data-type="E-mail">E-mail</div>
+                <div class="pix-option" data-type="Telefone">Telefone</div>
+            </div>
+
+            <input type="text" id="pixKey" class="pix-input" placeholder="Selecione um tipo acima" disabled>
+
+            <button class="btn-saque" onclick="abrirModal()">SOLICITAR SAQUE</button>
+            <div class="conf">✔ Pagamentos via PIX em poucos minutos</div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h2>⚠ Saque Bloqueado</h2>
+            <p>Para realizar o saque, é necessário ter feito um depósito.
+                O valor que você ganhou foi apenas para teste e não pode ser sacado diretamente. Após o depostivo seu
+                saldo cairá
+                na sua conta informada agora!</p>
+            <button onclick="irParaDeposito()">FAZER DEPÓSITO</button>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        let valorPremio = parseFloat(params.get("valor") || "0");
+        const saldoElemento = document.getElementById("valor");
+        const ganhosElemento = document.getElementById("totalEarned");
+        const pixOptions = document.querySelectorAll(".pix-option");
+        const pixKeyInput = document.getElementById("pixKey");
+        let selectedType = null;
+
+        ganhosElemento.textContent = "R$ " + valorPremio.toFixed(2).replace('.', ',');
+
+        function animarSaldo() {
+            let atual = 0;
+            let incremento = valorPremio / 50;
+            let intervalo = setInterval(() => {
+                atual += incremento;
+                if (atual >= valorPremio) {
+                    atual = valorPremio;
+                    clearInterval(intervalo);
+                }
+                saldoElemento.textContent = "R$ " + atual.toFixed(2).replace('.', ',');
+            }, 20);
+        }
+
+        pixOptions.forEach(opt => {
+            opt.addEventListener("click", () => {
+                pixOptions.forEach(o => o.classList.remove("selected"));
+                opt.classList.add("selected");
+                selectedType = opt.dataset.type;
+                pixKeyInput.disabled = false;
+                pixKeyInput.placeholder = "Digite sua chave " + selectedType;
+                pixKeyInput.value = "";
+            });
+        });
+
+        function abrirModal() {
+            if (!selectedType) {
+                alert("Selecione o tipo de chave PIX.");
+                return;
+            }
+            if (!pixKeyInput.value.trim()) {
+                alert("Digite sua chave PIX.");
+                return;
+            }
+            document.getElementById("modalOverlay").style.display = "flex";
+        }
+
+        function irParaDeposito() {
+            // Redireciona para página de depósito
+            window.location.href = "deposito.html"; // Trocar para URL real
+        }
+
+        setTimeout(animarSaldo, 300);
+    </script>
+</body>
+
+</html>
