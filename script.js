@@ -360,18 +360,34 @@ function resetScratchCard() {
     ctx.globalCompositeOperation = 'source-over';
     initializeScratchSurface();
 
-    gameState.isGameActive = false;
     gameState.scratchedPercentage = 0;
-
     document.querySelector('.container').classList.remove('game-active');
 
-    const buyButton = document.getElementById('buyButton');
-    if (gameState.currentBalance >= 10) {
-        buyButton.textContent = 'Raspar (R$ 10,00)';
-        buyButton.disabled = false;
+    if (gameState.currentCard === 1) {
+        // Primeira vez precisa clicar
+        gameState.isGameActive = false;
+        const buyButton = document.getElementById('buyButton');
+        if (gameState.currentBalance >= 10) {
+            buyButton.textContent = 'Raspar (R$ 10,00)';
+            buyButton.disabled = false;
+        } else {
+            buyButton.textContent = 'Saldo Insuficiente';
+            buyButton.disabled = true;
+        }
     } else {
-        buyButton.textContent = 'Saldo Insuficiente';
-        buyButton.disabled = true;
+        // Nas próximas vezes já ativa direto
+        if (gameState.currentBalance >= 10) {
+            gameState.currentBalance -= 10;
+            gameState.isGameActive = true;
+            updateUI();
+            document.querySelector('.container').classList.add('game-active');
+        } else {
+            // Se não tiver saldo, desativa o jogo
+            gameState.isGameActive = false;
+            const buyButton = document.getElementById('buyButton');
+            buyButton.textContent = 'Saldo Insuficiente';
+            buyButton.disabled = true;
+        }
     }
 }
 
@@ -379,14 +395,6 @@ function endGame() {
     const buyButton = document.getElementById('buyButton');
     buyButton.textContent = 'Jogo Finalizado';
     buyButton.disabled = true;
-
-    setTimeout(() => {
-        const finalMessage = `🎉 Parabéns! Você completou todas as 5 raspadinhas!\n\n` +
-            `💰 Total ganho: ${formatCurrency(gameState.totalEarned)}\n` +
-            `💳 Saldo final: ${formatCurrency(gameState.currentBalance)}\n\n` +
-            `Obrigado por jogar!`;
-        alert(finalMessage);
-    }, 1000);
 }
 
 function updateUI() {
