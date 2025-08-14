@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raspou Ganhou - Raspadinha</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
             <div class="logo">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA2MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0ZGNjUwMCIvPgo8dGV4dCB4PSIzMCIgeT0iMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SQVNQQUlOSEE8L3RleHQ+Cjwvc3ZnPgo=" alt="Raspou Ganhou">
+                <img src="images/logo_rs.webp" alt="Raspou Ganhou">
             </div>
             <div class="balance-earned">
                 <span class="balance-label">Ganhos:</span>
                 <span class="balance-value" id="totalEarned">R$ 0,00</span>
             </div>
-            <div class="user-menu">
-                <div class="user-icon">👤</div>
-                <div class="dropdown-arrow">▼</div>
-            </div>
         </header>
-
-        <!-- Back Button -->
-        <div class="back-button">
-            <span class="back-arrow">←</span>
-            <span>Voltar</span>
-        </div>
 
         <!-- Main Content -->
         <main class="main-content">
@@ -41,32 +33,30 @@
                 <div class="scratch-card">
                     <canvas id="scratchCanvas" width="300" height="200"></canvas>
                     <div class="scratch-overlay" id="scratchOverlay">
-                        <div class="scratch-stars">⭐ ⭐ ⭐</div>
-                        <div class="scratch-finger">👆</div>
-                        <div class="scratch-text">RASPE AQUI!</div>
+                        <div class="scratch-stars"></div>
+                        <div class="scratch-finger"></div>
+                        <div class="scratch-text"></div>
                         <div class="scratch-instruction">
-                            Raspe os 9 quadradinhos, encontre<br>
-                            3 símbolos iguais e ganhe o prêmio!
                         </div>
                     </div>
                     <div class="prize-area" id="prizeArea">
                         <div class="prize-grid">
-                            <div class="prize-cell">💰</div>
-                            <div class="prize-cell">💎</div>
-                            <div class="prize-cell">💰</div>
-                            <div class="prize-cell">🎯</div>
-                            <div class="prize-cell">💰</div>
-                            <div class="prize-cell">🎯</div>
-                            <div class="prize-cell">💎</div>
-                            <div class="prize-cell">🎯</div>
-                            <div class="prize-cell">💎</div>
+                            <!-- Apenas células vazias, as imagens serão adicionadas pelo JS -->
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
+                            <div class="prize-cell"></div>
                         </div>
-                        <div class="prize-amount">R$ 100,00</div>
                     </div>
                 </div>
-                
+
                 <div class="game-tip">
-                    💡 Clique em "Comprar e Raspar" para iniciar o jogo
+                    💡 Clique em "Raspar" para iniciar o jogo
                 </div>
             </div>
 
@@ -74,6 +64,8 @@
             <button class="buy-button" id="buyButton">
                 Raspar (R$ 10,00)
             </button>
+
+            <!-- <button id="revealButton" class="buy-button">Revelar Tudo</button> -->
 
             <!-- Balance Section -->
             <div class="balance-section">
@@ -98,4 +90,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
