@@ -41,17 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function resizeCanvas() {
-    canvas.width = 300;
-    canvas.height = 200;
+    const availableHeight = window.innerHeight * 0.3; // 30% da tela
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = availableHeight;
     canvas.style.width = '100%';
-    canvas.style.height = '200px';
+    canvas.style.height = availableHeight + 'px';
 }
 
 let brushPattern = null;
 
 function initializeScratchSurface() {
     const img = new Image();
-    img.src = 'images/raspe_aqui.webp';
+    img.src = 'images/raspeaqui.png';
 
     img.onload = function () {
         const container = canvas.parentElement;
