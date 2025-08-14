@@ -8,18 +8,18 @@ html, body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     color: white;
-    height: 100%;
-    overflow-y: auto; /* permite scroll se necessário */
-    position: relative; /* remove fixo */
+    height: 100vh;
+    overflow: hidden; /* impede scroll */
 }
+
 
 .container {
     max-width: 400px;
     margin: 0 auto;
-    min-height: 100vh;
-    /* ocupa a tela toda */
+    height: 100vh; /* sempre ocupar a tela */
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* distribui elementos */
 }
 
 /* Header */
@@ -501,51 +501,30 @@ html, body {
 }
 
 @media (max-width: 480px) {
-    .header {
-        padding: 8px 10px;
-    }
-
-    .logo img {
-        height: 30px;
+    .main-content {
+        padding: 10px;
+        flex: 1; /* ocupa espaço restante */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .game-title {
-        margin-bottom: 15px;
-    }
-
-    .game-title h1 {
-        font-size: 20px;
         margin-bottom: 5px;
     }
 
-    .game-description {
-        font-size: 12px;
-    }
-
-    .scratch-card {
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
     #scratchCanvas {
-        height: 150px; /* menor para caber na tela */
+        height: 140px; /* menor que antes */
     }
 
     .buy-button {
         padding: 10px;
-        font-size: 16px;
-        margin-bottom: 15px;
+        font-size: 14px;
+        margin-bottom: 10px;
     }
 
     .balance-section {
-        padding: 10px;
-    }
-
-    .balance-amount {
-        font-size: 18px;
-    }
-
-    .popup {
-        padding: 20px;
+        padding: 8px;
+        font-size: 14px;
     }
 }
