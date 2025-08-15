@@ -41,11 +41,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function resizeCanvas() {
-    const availableHeight = Math.min(window.innerHeight * 0.28, 150);
-    canvas.width = canvas.parentElement.clientWidth;
-    canvas.height = availableHeight;
+    // Calcula dimensões responsivas baseadas no container
+    const container = canvas.parentElement;
+    const containerWidth = container.clientWidth - 30; // Subtrai padding
+    const containerHeight = Math.min(window.innerHeight * 0.3, 250);
+    
+    // Define proporção 4:3 para manter consistência
+    const aspectRatio = 4 / 3;
+    let canvasWidth = containerWidth;
+    let canvasHeight = canvasWidth / aspectRatio;
+    
+    // Ajusta se a altura calculada for muito grande
+    if (canvasHeight > containerHeight) {
+        canvasHeight = containerHeight;
+        canvasWidth = canvasHeight * aspectRatio;
+    }
+    
+    // Garante dimensões mínimas
+    canvasWidth = Math.max(canvasWidth, 280);
+    canvasHeight = Math.max(canvasHeight, 180);
+    
+    // Aplica as dimensões
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
     canvas.style.width = '100%';
-    canvas.style.height = availableHeight + 'px';
+    canvas.style.height = 'auto';
+    canvas.style.maxHeight = containerHeight + 'px';
 }
 
 let brushPattern = null;
@@ -55,12 +76,9 @@ function initializeScratchSurface() {
     img.src = 'images/raspeaqui.png';
 
     img.onload = function () {
-        const container = canvas.parentElement;
-        canvas.width = container.clientWidth;
-        canvas.height = container.clientWidth * (img.height / img.width);
-        canvas.style.width = "100%";
-        canvas.style.height = "250px";
-
+        // Redimensiona o canvas baseado no container
+        resizeCanvas();
+        
         ctx.globalCompositeOperation = 'source-over';
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
@@ -73,6 +91,16 @@ function initializeScratchSurface() {
         totalPixels = canvas.width * canvas.height;
         scratchedPixels = 0;
 
+        updatePrizeSymbols();
+    };
+    
+    img.onerror = function() {
+        // Fallback se a imagem não carregar
+        resizeCanvas();
+        ctx.fillStyle = 'linear-gradient(135deg, #666, #888)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        totalPixels = canvas.width * canvas.height;
+        scratchedPixels = 0;
         updatePrizeSymbols();
     };
 }
@@ -111,6 +139,13 @@ function updatePrizeSymbols() {
         img.src = roundSymbols[index].img;
         img.alt = `${roundSymbols[index].value} Reais`;
         img.dataset.value = roundSymbols[index].value;
+        
+        // Adiciona tratamento de erro para imagens
+        img.onerror = function() {
+            // Fallback: mostra o valor como texto se a imagem não carregar
+            cell.innerHTML = `<div class="prize-amount">R$ ${roundSymbols[index].value}</div>`;
+        };
+        
         cell.innerHTML = '';
         cell.appendChild(img);
     });
@@ -149,13 +184,36 @@ function setupEventListeners() {
         if (e.target === canvas) e.preventDefault();
     }, { passive: false });
 
-    // Resize
-    window.addEventListener('resize', function () {
+    // Resize responsivo
+    window.addEventListener('resize', debounce(function () {
         resizeCanvas();
         if (!gameState.isGameActive) {
             initializeScratchSurface();
         }
+    }, 250));
+    
+    // Orientação
+    window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+            resizeCanvas();
+            if (!gameState.isGameActive) {
+                initializeScratchSurface();
+            }
+        }, 100);
     });
+}
+
+// Função debounce para otimizar resize
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 function startGame() {
@@ -234,10 +292,12 @@ function scratchAtPosition(x, y) {
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = brushPattern ? brushPattern : 'rgba(0,0,0,1)';
     ctx.beginPath();
-    ctx.arc(x, y, 25, 0, 2 * Math.PI);
+    
+    // Ajusta o tamanho do pincel baseado no tamanho da tela
+    const brushSize = Math.max(15, Math.min(35, canvas.width * 0.08));
+    ctx.arc(x, y, brushSize, 0, 2 * Math.PI);
     ctx.fill();
 
-    // >>> CHAMA sem false para permitir revelar
     updateScratchedPercentage();
 }
 
@@ -304,7 +364,7 @@ function checkWinCondition() {
 
                 // Troca o emoji pela imagem real do prêmio
                 const moneyIcon = document.querySelector('.money-icon');
-                moneyIcon.innerHTML = `<img src="${prizeImageSrc}" alt="Prêmio" style="width:60px;height:auto;">`;
+                moneyIcon.innerHTML = `<img src="${prizeImageSrc}" alt="Prêmio" style="width:60px;height:auto;max-width:100%;">`;
 
                 document.getElementById('popupOverlay').style.display = 'flex';
             }, 2000);
