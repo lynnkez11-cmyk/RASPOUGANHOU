@@ -19,18 +19,18 @@
         }
 
         .saldo-label {
-            font-size: 15px;
+            font-size: 14px;
             color: #ccc;
             text-align: center;
-            margin-bottom: 10%;
+            margin-bottom: 2px;
         }
 
         .saldo-valor {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: bold;
             color: #00ff95;
             text-align: center;
-            margin-bottom: 10%;
+            margin-bottom: 8px;
         }
 
         .pix-options {
@@ -38,7 +38,7 @@
             grid-template-columns: repeat(2, 120px);
             gap: 8px;
             justify-content: center;
-            margin-bottom: 10%;
+            margin-bottom: 10px;
         }
 
         .pix-option {
@@ -75,7 +75,6 @@
             color: white;
             font-size: 15px;
             outline: none;
-            margin-bottom: 5%;
         }
 
         .btn-saque {
@@ -158,14 +157,19 @@
         }
 
         .container-saque {
+            max-width: 400px;
             margin: 0 auto;
             height: 100vh;
-            flex-direction: column;
-            justify-content: space-between;
+            position: relative;
+
         }
 
         .main-content-saque {
-            padding: 20px;
+            display: grid;
+            gap: 16px;
+            justify-items: center;
+            margin-bottom: 16px;
+            margin-top: 30px;
         }
 
         @keyframes fadeIn {
@@ -197,7 +201,7 @@
 
         <!-- Conteúdo principal -->
         <main class="main-content-saque">
-            <h1 style="font-size: 32px; padding: 10px;">Solicitar Saque</h1>
+            <h1 style="font-size: 32px;">Solicitar Saque</h1>
             <div class="saldo-label">Saldo disponível para saque:</div>
             <div class="saldo-valor" id="valor">R$ 0,00</div>
 

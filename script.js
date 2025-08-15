@@ -59,7 +59,7 @@ function initializeScratchSurface() {
         canvas.width = container.clientWidth;
         canvas.height = container.clientWidth * (img.height / img.width);
         canvas.style.width = "100%";
-        canvas.style.height = "200px";
+        canvas.style.height = "250px";
 
         ctx.globalCompositeOperation = 'source-over';
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);

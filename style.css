@@ -19,8 +19,11 @@ body {
     max-width: 400px;
     margin: 0 auto;
     height: 100vh;
+    /* sempre ocupar a tela */
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* distribui elementos */
 }
 
 /* Header */
@@ -135,7 +138,7 @@ body {
 
 #scratchCanvas {
     width: 100%;
-    height: 150px;
+    height: 200px;
     border-radius: 10px;
     cursor: pointer;
     position: relative;
@@ -269,7 +272,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     transition: all 0.3s ease;
 }
 
@@ -442,6 +445,41 @@ body {
     box-shadow: none;
 }
 
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+    }
+
+    .header {
+        padding: 12px 15px;
+    }
+
+    .balance-earned {
+        padding: 6px 10px;
+    }
+
+    .balance-value {
+        font-size: 12px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .game-title h1 {
+        font-size: 24px;
+    }
+
+    .scratch-card {
+        padding: 15px;
+    }
+
+    #scratchCanvas {
+        height: 180px;
+    }
+}
+
 /* Touch Support */
 @media (hover: none) and (pointer: coarse) {
     .buy-button:hover {
@@ -495,7 +533,7 @@ body {
     }
 
     #scratchCanvas {
-        height: 100px;
+        height: 140px;
         /* menor que antes */
     }
 
