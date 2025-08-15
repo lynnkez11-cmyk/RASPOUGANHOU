@@ -414,7 +414,7 @@ function updateUI() {
 function updateCardInfo() {
     const gameDescription = document.querySelector('.game-description');
     if (gameState.scratchCardsRemaining > 0) {
-        gameDescription.textContent = `Raspadinha ${gameState.currentCard} de 5 - Prêmios de até R$ 100,00`;
+        gameDescription.textContent = `Raspadinha ${gameState.currentCard} de 5 - Prêmios de até R$ 500,00`;
     } else {
         gameDescription.textContent = 'Todas as raspadinhas foram completadas!';
     }

@@ -19,11 +19,8 @@ body {
     max-width: 400px;
     margin: 0 auto;
     height: 100vh;
-    /* sempre ocupar a tela */
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* distribui elementos */
 }
 
 /* Header */
@@ -272,7 +269,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     transition: all 0.3s ease;
 }
 
