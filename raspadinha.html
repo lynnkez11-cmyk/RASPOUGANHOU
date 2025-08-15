@@ -1,96 +1,88 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Raspou Ganhou - Raspadinha</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">
-                <img src="images/logo_rs.webp" alt="Raspou Ganhou">
-            </div>
-            <div class="balance-earned">
-                <span class="balance-label">Ganhos:</span>
-                <span class="balance-value" id="totalEarned">R$ 0,00</span>
-            </div>
-        </header>
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">
+          <img src="images/logo_rs.webp" alt="Raspou Ganhou" />
+        </div>
+        <div class="balance-earned">
+          <span class="balance-label">Ganhos:</span>
+          <span class="balance-value" id="totalEarned">R$ 0,00</span>
+        </div>
+      </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="game-title">
-                <h1>Raspou Ganhou</h1>
-                <p class="game-description"></p>
-            </div>
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="game-title">
+          <h1>Raspou Ganhou</h1>
+          <p class="game-description"></p>
+        </div>
 
-            <!-- Scratch Card Area -->
-            <div class="scratch-card-container">
-                <div class="scratch-card">
-                    <canvas id="scratchCanvas" width="300" height="200"></canvas>
-                    <div class="scratch-overlay" id="scratchOverlay">
-                        <div class="scratch-stars"></div>
-                        <div class="scratch-finger"></div>
-                        <div class="scratch-text"></div>
-                        <div class="scratch-instruction">
-                        </div>
-                    </div>
-                    <div class="prize-area" id="prizeArea">
-                        <div class="prize-grid">
-                            <!-- Apenas células vazias, as imagens serão adicionadas pelo JS -->
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                            <div class="prize-cell"></div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Scratch Card Area -->
+        <div class="scratch-card-container">
+          <div class="scratch-card">
+            <!-- IMPORTANTE: o canvas agora dimensiona via JS com DPR -->
+            <canvas id="scratchCanvas"></canvas>
 
-                <div class="game-tip">
-                    💡 Clique em "Raspar" para iniciar o jogo
-                </div>
+            <div class="scratch-overlay" id="scratchOverlay">
+              <div class="scratch-stars"></div>
+              <div class="scratch-finger"></div>
+              <div class="scratch-text"></div>
+              <div class="scratch-instruction"></div>
             </div>
 
-            <!-- Buy Button -->
-            <button class="buy-button" id="buyButton">
-                Raspar (R$ 10,00)
-            </button>
-
-            <button class="redeem-button" id="redeemButton" style="display: none;">
-                Resgatar prêmio
-            </button>
-
-            <!-- Balance Section -->
-            <div class="balance-section">
-                <div class="balance-title">SEU SALDO</div>
-                <div class="balance-amount" id="userBalance">R$ 50,00</div>
+            <div class="prize-area" id="prizeArea">
+              <div class="prize-grid">
+                <!-- Células vazias; imagens via JS -->
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+                <div class="prize-cell"></div>
+              </div>
             </div>
-        </main>
+          </div>
+
+          <div class="game-tip">💡 Clique em "Raspar" para iniciar o jogo</div>
+        </div>
+
+        <!-- Buy Button -->
+        <button class="buy-button" id="buyButton">Raspar (R$ 10,00)</button>
+        <button class="redeem-button" id="redeemButton" style="display: none">Resgatar prêmio</button>
+
+        <!-- Balance Section -->
+        <div class="balance-section">
+          <div class="balance-title">SEU SALDO</div>
+          <div class="balance-amount" id="userBalance">R$ 50,00</div>
+        </div>
+      </main>
     </div>
 
     <!-- Win Popup -->
     <div class="popup-overlay" id="popupOverlay">
-        <div class="popup">
-            <div class="popup-content">
-                <div class="money-icon">💰</div>
-                <h2>Parabéns!</h2>
-                <p>Você ganhou</p>
-                <div class="prize-won" id="prizeWon">R$ 100,00</div>
-                <button class="popup-button" id="collectButton">Coletar Prêmio</button>
-            </div>
+      <div class="popup">
+        <div class="popup-content">
+          <div class="money-icon">💰</div>
+          <h2>Parabéns!</h2>
+          <p>Você ganhou</p>
+          <div class="prize-won" id="prizeWon">R$ 100,00</div>
+          <button class="popup-button" id="collectButton">Coletar Prêmio</button>
         </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
