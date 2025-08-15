@@ -13,39 +13,39 @@
         }
 
         h1 {
-            font-size: 22px;
-            margin-bottom: 5px;
+            font-size: 20px;
             text-align: center;
+            margin-bottom: 4px;
         }
 
         .saldo-label {
-            font-size: 14px;
+            font-size: 15px;
             color: #ccc;
             text-align: center;
-            margin-bottom: 4px;
+            margin-bottom: 10%;
         }
 
         .saldo-valor {
             font-size: 36px;
             font-weight: bold;
             color: #00ff95;
-            margin-bottom: 15px;
             text-align: center;
+            margin-bottom: 10%;
         }
 
         .pix-options {
             display: grid;
             grid-template-columns: repeat(2, 120px);
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 10%;
         }
 
         .pix-option {
             background: #2a2a2a;
             border: 2px solid transparent;
             border-radius: 10px;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             cursor: pointer;
             font-weight: bold;
@@ -67,22 +67,23 @@
             display: block;
             width: 90%;
             max-width: 300px;
-            margin: 0 auto 12px;
-            padding: 10px;
+            margin: 0 auto 8px;
+            padding: 8px;
             border-radius: 8px;
             border: none;
             background: #333;
             color: white;
             font-size: 15px;
             outline: none;
+            margin-bottom: 5%;
         }
 
         .btn-saque {
             display: block;
             width: 90%;
             max-width: 300px;
-            margin: 0 auto;
-            padding: 12px;
+            margin: 8px auto 0;
+            padding: 10px;
             background: linear-gradient(135deg, #00ff95, #00cc78);
             color: #1a1a1a;
             font-size: 16px;
@@ -102,7 +103,7 @@
         .conf {
             font-size: 11px;
             color: #888;
-            margin-top: 8px;
+            margin-top: 5px;
             text-align: center;
         }
 
@@ -122,8 +123,8 @@
 
         .modal {
             background: #1a1a1a;
-            color: black;
-            padding: 25px;
+            color: white;
+            padding: 20px;
             border-radius: 12px;
             max-width: 350px;
             width: 90%;
@@ -133,29 +134,38 @@
         }
 
         .modal h2 {
-            font-size: 30px;
-            margin-bottom: 10px;
+            font-size: 22px;
             font-weight: bold;
-            color: white;
+            margin-bottom: 8px;
         }
 
         .modal p {
-            font-size: 20px;
-            color: white;
-            margin-bottom: 20px;
+            font-size: 14px;
             line-height: 1.4;
+            margin-bottom: 15px;
         }
 
         .modal button {
             background: linear-gradient(135deg, #00ff95, #00cc78);
             color: #1a1a1a;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-radius: 8px;
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+        }
+
+        .container-saque {
+            margin: 0 auto;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .main-content-saque {
+            padding: 20px;
         }
 
         @keyframes fadeIn {
@@ -173,7 +183,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-saque">
         <!-- Header -->
         <header class="header">
             <div class="logo">
@@ -186,8 +196,8 @@
         </header>
 
         <!-- Conteúdo principal -->
-        <main class="main-content">
-            <h1>💸 Solicitar Saque</h1>
+        <main class="main-content-saque">
+            <h1 style="font-size: 32px; padding: 10px;">Solicitar Saque</h1>
             <div class="saldo-label">Saldo disponível para saque:</div>
             <div class="saldo-valor" id="valor">R$ 0,00</div>
 
@@ -266,7 +276,7 @@
 
         function irParaDeposito() {
             // Redireciona para página de depósito
-            window.location.href = "deposito.html"; // Trocar para URL real
+            window.location.href = "https://go.paradisepagbr.com/lmreyp7edi"; // Trocar para URL real
         }
 
         setTimeout(animarSaldo, 300);
